@@ -8,19 +8,15 @@ This program detects when a USB device is connected to the system and automatica
 
 ## Requirements
 - Python 3.x
-- `pywinusb` for USB detection
+- `pywin32` for USB detection
 - `tkinter` for GUI
 
 ## Installation
 
-1. Clone the repository:
-   `git clone https://github.com/5iruss/EndlessError`
-
-2. Make sure you have pip installed. Then, run the following command to install the required packages:
-   `pip install pywin32`
-
-3. Run the Application
-
+1. Clone the repository: ```bash git clone https://github.com/5iruss/EndlessError ``` 
+2. Make sure you have pip installed. Then, run the following command to install the required packages: ```bash pip install pywin32 ``` 
+3. Run the application: ```bash python EndlessError.py ``` 
 4. Plug in a USB drive to see the error popups appear.
+
 
 
