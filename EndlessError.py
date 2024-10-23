@@ -4,6 +4,7 @@ import random
 import threading
 
 stop_flag = False
+popups = []
 error_messages = [("TechSino", "#00FF00"), ("Unreal.VC", "red")]
 
 def show_multiple_errors():
@@ -22,6 +23,7 @@ def show_multiple_errors():
             popup = tk.Toplevel(root)
             popup.geometry(f"200x100+{x_position}+{y_position}")
             popup.config(bg="black")
+            popups.append(popup)
             
             neon_bg = "black"
             if error_message == "TechSino":
@@ -38,6 +40,9 @@ def show_multiple_errors():
 def stop_loop():
     global stop_flag
     stop_flag = True
+    for popup in popups:
+        popup.destroy()
+    popups.clear()
 
 root = tk.Tk()
 root.withdraw()
