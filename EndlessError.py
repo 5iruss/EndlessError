@@ -2,6 +2,8 @@ import tkinter as tk
 import time
 import random
 import threading
+import win32file
+import win32api
 
 stop_flag = False
 popups = []
@@ -14,7 +16,7 @@ def show_multiple_errors():
     counter = 0
 
     while not stop_flag:
-        for _ in range(5):
+        for _ in range(10):
             x_position = random.randint(0, screen_width - 200)
             y_position = random.randint(0, screen_height - 100)
             error_message, text_color = error_messages[counter % 2]
@@ -35,7 +37,7 @@ def show_multiple_errors():
             label = tk.Label(popup, text=error_message, fg=text_color, bg=neon_bg, font=("Arial", 14, "bold"))
             label.pack(expand=True, fill='both')
         
-        time.sleep(0.2)
+        time.sleep(0.1)
 
 def stop_loop():
     global stop_flag
@@ -44,8 +46,18 @@ def stop_loop():
         popup.destroy()
     popups.clear()
 
+def detect_usb():
+    while True:
+        drives = win32api.GetLogicalDriveStrings()
+        drives = drives.split('\000')[:-1]
+        for drive in drives:
+            if win32file.GetDriveType(drive) == win32file.DRIVE_REMOVABLE:
+                threading.Thread(target=show_multiple_errors).start()
+                time.sleep(20)
+                stop_loop()
+                return
+
 root = tk.Tk()
 root.withdraw()
-threading.Thread(target=show_multiple_errors).start()
-threading.Timer(5, stop_loop).start()
+threading.Thread(target=detect_usb).start()
 root.mainloop()
