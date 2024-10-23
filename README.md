@@ -16,7 +16,7 @@ This program detects when a USB device is connected to the system and automatica
 1. Clone the repository:
    `git clone https://github.com/5iruss/EndlessError`
 
-2. Make sure you have pip installed. Then, run the following command to install the required packages:
+2. Run the following command to install the required packages:
    `pip install pywin32`
 
 3. Run the Application
